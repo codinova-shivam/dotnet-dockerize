@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  demo:
+    image: demo
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://+:80;https://+:443
+        - ASPNETCORE_HTTPS_PORT=5254 
+        - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - 5204:80
+      - 5254:443
+    volumes:
+      - ~/.aspnet/https:/https:ro

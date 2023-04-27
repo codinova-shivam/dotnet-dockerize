@@ -1,29 +1,15 @@
-FROM centos:7 AS base
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 
-# Add Microsoft package repository and install ASP.NET Core
-RUN rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm \
-    && yum install -y aspnetcore-runtime-6.0
-
-ENV DOTNET_URLS=http://+:5000
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 as build
-
-WORKDIR /source
-
+WORKDIR /App
 # Copy everything
-COPY ["practices.csproj", "."]
-
-# Restore as distinct layers
-WORKDIR /src
-RUN dotnet restore "./practices.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "practices.csproj" -c Release -o /app/build
+# Restore as distinct layers
+RUN dotnet restore
 # Build and publish a release
-FROM build AS publish
-RUN dotnet publish "./practices.csproj" -c release -o /app --no-restore
+RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+WORKDIR /App
+COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "practices.dll"]
