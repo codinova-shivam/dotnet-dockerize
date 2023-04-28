@@ -15,6 +15,35 @@ services:
     ports:
       - 5204:80
       - 5254:443
+    command: dotnet practices.dll
     volumes:
       - ~/.aspnet/https:/https:ro
-    command: dotnet practices.dll
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dev
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=codinova1234
+      - POSTGRES_DB=practice_db #optional (specify default database instead of $POSTGRES_DB)
+    ports:
+      - 5000:5432
+    restart: always
+    networks:
+      - dev
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready","-U","postgres", "-d", "practice_db"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s  
+networks:
+  dev:
+    driver: bridge
