@@ -2,30 +2,21 @@ version: '3.4'
 
 services:
   demo:
-    image: demo
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: upadhyayshivam/demo-dotnet
     environment:
         - ASPNETCORE_ENVIRONMENT=Development
-        - ASPNETCORE_URLS=http://+:80;https://+:443
-        - ASPNETCORE_HTTPS_PORT=5254 
-        - ASPNETCORE_Kestrel__Certificates__Default__Password=password
-        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+        - ASPNETCORE_URLS=http://+:80
     ports:
-      - 5204:80
-      - 5254:443
+      - 80:80
     command: dotnet practices.dll
-    volumes:
-      - ~/.aspnet/https:/https:ro
     depends_on:
-      postgres:
+      postgres_db:
         condition: service_healthy
     networks:
       - dev
 
-  postgres:
-    container_name: postgres
+  postgres_db:
+    container_name: postgres_db
     image: postgres:latest
     environment:
       - POSTGRES_USER=postgres
@@ -37,8 +28,6 @@ services:
     restart: always
     networks:
       - dev
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "practice_db"]
       interval: 30s
