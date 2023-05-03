@@ -62,6 +62,7 @@ namespace practices.Repository
                 issuer:  _configuration["Jwt:ValidIssuer"], 
                 audience:  _configuration["Jwt:ValidAudience"], 
                 claims: authClaims, 
+                expires: DateTime.Now.AddMinutes(10),
                 notBefore: new DateTimeOffset(DateTime.Now).DateTime, 
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes( _configuration["Jwt:Secret"])), 
                 SecurityAlgorithms.HmacSha256Signature)
