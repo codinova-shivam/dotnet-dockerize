@@ -110,9 +110,6 @@ using (var scope = app.Services.CreateScope())
 }
 app.UseCors();
 
-
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
