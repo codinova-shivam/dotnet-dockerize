@@ -8,6 +8,8 @@ using practices.Data;
 
 #nullable disable
 
+
+
 namespace practices.Migrations
 {
     [DbContext(typeof(ApiContext))]

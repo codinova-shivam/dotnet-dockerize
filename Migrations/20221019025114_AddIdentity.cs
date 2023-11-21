@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+
+
 namespace practices.Migrations
 {
     public partial class AddIdentity : Migration
