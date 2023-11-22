@@ -2641,11 +2641,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/shivamupadhyay/projects/practices/practices.csproj",
+      "projectUniqueName": "/Users/shivamupadhyay/projects/dotnet-dockerize/practices.csproj",
       "projectName": "practices",
-      "projectPath": "/Users/shivamupadhyay/projects/practices/practices.csproj",
+      "projectPath": "/Users/shivamupadhyay/projects/dotnet-dockerize/practices.csproj",
       "packagesPath": "/Users/shivamupadhyay/.nuget/packages/",
-      "outputPath": "/Users/shivamupadhyay/projects/practices/obj/",
+      "outputPath": "/Users/shivamupadhyay/projects/dotnet-dockerize/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/shivamupadhyay/.nuget/NuGet/NuGet.Config"
@@ -2718,6 +2718,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.21, 6.0.21]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-x64",
+            "version": "[6.0.21, 6.0.21]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.21, 6.0.21]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2726,7 +2740,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
       }
     }
   }
