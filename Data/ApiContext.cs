@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using practices.Models;
 
-namespace practices.Data{
+namespace practices.Data {
     public class ApiContext: IdentityDbContext<ApplicationUser> {
 
         public ApiContext(DbContextOptions<ApiContext> options)
